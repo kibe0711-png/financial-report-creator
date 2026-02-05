@@ -4,6 +4,8 @@ import { generateBalanceSheet, generateIncomeStatement } from '@/lib/report-gene
 import ReactPDF from '@react-pdf/renderer'
 import { FinancialReportPDF } from '@/lib/pdf-templates/financial-report'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)

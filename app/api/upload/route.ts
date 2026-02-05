@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { Decimal } from '@prisma/client/runtime/library'
 
+export const dynamic = 'force-dynamic'
+
 interface EntryInput {
   accountCode: string
   accountName: string

@@ -6,6 +6,8 @@ import { Plus, FolderOpen, Trash2 } from "lucide-react"
 import { formatDate } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 
+export const dynamic = 'force-dynamic'
+
 async function getProjects() {
   const projects = await prisma.project.findMany({
     orderBy: { updatedAt: 'desc' },
