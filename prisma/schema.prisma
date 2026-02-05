@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  companyName String
+  periodEnd   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  entries     Entry[]
+}
+
+model Entry {
+  id             String   @id @default(cuid())
+  projectId      String
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  accountCode    String
+  accountName    String
+  amount         Decimal  @db.Decimal(18, 2)
+  adjustments    Decimal? @db.Decimal(18, 2)
+  finalAmount    Decimal  @db.Decimal(18, 2)
+  classification String   // bs_non_current_asset, bs_current_asset, bs_non_current_liability, bs_current_liability, bs_equity, pnl_revenue, pnl_cost_of_sales, pnl_operating_expense, pnl_finance_cost, pnl_tax
+  reportSection  String   // balance_sheet, pnl
+  isManual       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@index([projectId])
+  @@index([classification])
+}
+
+model ClassificationRule {
+  id             String @id @default(cuid())
+  pattern        String // e.g., "300.*" or "BDO 057*"
+  classification String
+  reportSection  String
+  priority       Int    @default(0)
+
+  @@unique([pattern])
+}
