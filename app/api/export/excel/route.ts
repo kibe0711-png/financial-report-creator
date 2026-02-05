@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
       incomeStatement
     )
 
-    return new NextResponse(buffer, {
+    return new NextResponse(buffer as unknown as BodyInit, {
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'Content-Disposition': `attachment; filename="${project.companyName.replace(/[^a-zA-Z0-9]/g, '_')}_Financial_Report.xlsx"`,

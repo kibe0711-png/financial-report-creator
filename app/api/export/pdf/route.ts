@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
     }
     const buffer = Buffer.concat(chunks)
 
-    return new NextResponse(buffer, {
+    return new NextResponse(buffer as unknown as BodyInit, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${project.companyName.replace(/[^a-zA-Z0-9]/g, '_')}_Financial_Report.pdf"`,
