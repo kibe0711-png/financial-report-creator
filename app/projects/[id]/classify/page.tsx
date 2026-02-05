@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -13,7 +13,7 @@ import { getClassificationOptions } from '@/lib/classifier'
 import type { Classification, ReportSection, EntryData } from '@/types'
 
 interface ClassifyPageProps {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 interface Entry {
@@ -28,7 +28,7 @@ interface Entry {
 }
 
 export default function ClassifyPage({ params }: ClassifyPageProps) {
-  const { id } = use(params)
+  const { id } = params
   const router = useRouter()
   const [entries, setEntries] = useState<Entry[]>([])
   const [loading, setLoading] = useState(true)

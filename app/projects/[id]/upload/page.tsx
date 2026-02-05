@@ -5,14 +5,13 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { CSVUploader } from '@/components/csv-uploader'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { use } from 'react'
 
 interface UploadPageProps {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 export default function UploadPage({ params }: UploadPageProps) {
-  const { id } = use(params)
+  const { id } = params
   const router = useRouter()
 
   const handleUploadComplete = () => {
